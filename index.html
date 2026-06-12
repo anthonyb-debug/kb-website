@@ -883,6 +883,7 @@
         <a href="#" onclick="showSection('tools',this);closeNav()"><span class="dot"></span> Tools &amp; Logins</a>
         <a href="#" onclick="showSection('chatter',this);closeNav()"><span class="dot"></span> Salesforce Chatter</a>
         <a href="#" onclick="showSection('reminders',this);closeNav()"><span class="dot"></span> Call Reminders</a>
+        <a href="#" onclick="showSection('chat-reminders',this);closeNav()"><span class="dot"></span> Chat Reminders</a>
         <a href="#" onclick="showSection('empathy',this);closeNav()"><span class="dot"></span> 💬 Empathy Responses</a>
         <a href="#" onclick="showSection('terms',this);closeNav()"><span class="dot"></span> Addiction Terms</a>
       </div>
@@ -1056,8 +1057,11 @@
           <tbody>
             <tr><td class="label">CallTracking Metrics</td><td class="desc"><a href="https://app.calltrackingmetrics.com/" target="_blank" rel="noopener noreferrer" style="color:var(--accent2)">CLICK HERE</a></td></tr>
             <tr><td class="label">Salesforce</td><td class="desc"><a href="https://legacydetox.lightning.force.com/" target="_blank" rel="noopener noreferrer" style="color:var(--accent2)">CLICK HERE</a></td></tr>
-            <tr><td class="label">Legacy Form Tracker</td><td class="desc"><a href="https://docs.google.com/forms/d/e/1FAIpQLScMDK8V_iKD5q0O7Ns1wHvp5pdhlZPVvD3motX4j4B7EbDUFA/viewform?usp=dialog" target="_blank" rel="noopener noreferrer" style="color:var(--accent2)">CLICK HERE</a></td></tr>
             <tr><td class="label">Zoho Sales IQ (Chat)</td><td class="desc"><a href="https://salesiq.zoho.com/legacyhealingcenter" target="_blank" rel="noopener noreferrer" style="color:var(--accent2)">CLICK HERE</a></td></tr>
+            <tr><td class="label">LHC Agent Dashboard</td><td class="desc"><a href="https://lhcagentdashboard.onhercules.app/dashboard" target="_blank" rel="noopener noreferrer" style="color:var(--accent2)">CLICK HERE</a></td></tr>
+            <tr><td class="label">LHC Knowledge Base</td><td class="desc"><a href="https://lhc-kb-theta.vercel.app/" target="_blank" rel="noopener noreferrer" style="color:var(--accent2)">CLICK HERE</a></td></tr>
+            <tr><td class="label">LHC Call Disposition Tracker</td><td class="desc"><a href="https://lhc-tracker.vercel.app/" target="_blank" rel="noopener noreferrer" style="color:var(--accent2)">CLICK HERE</a></td></tr>
+            <tr><td class="label">LHC Emailer Extension</td><td class="desc"><a href="https://drive.google.com/drive/folders/1kwpBBy6AjYUnfTz1l3Vf4icoqTUODpE4?usp=drive_link" target="_blank" rel="noopener noreferrer" style="color:var(--accent2)">CLICK HERE</a></td></tr>
             <tr><td class="label">Legacy Email</td><td class="desc">legacy@allianceglobalsolutions.com</td></tr>
             <tr><td class="label">Email Password</td><td class="desc">ASTLEG@ags2025$</td></tr>
           </tbody>
@@ -1143,6 +1147,40 @@
       </div>
       <div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:1rem 1.25rem;font-size:0.9rem;color:var(--muted);line-height:1.7;">
         "How do you receive that insurance? Is it through work, a family member, do you pay monthly or is it through Medicaid/Medicare?"
+      </div>
+    </div>
+
+    <!-- CHAT REMINDERS -->
+    <div id="chat-reminders" class="section">
+      <div class="section-header">
+        <div class="section-tag">First Aid</div>
+        <h1>Chat Reminders</h1>
+        <p>Engagement and follow-up procedures for chat conversations.</p>
+      </div>
+
+      <div class="card" id="chat-engagement">
+        <div class="card-header" onclick="toggleCard('chat-engagement')"><div class="card-title">💬 Chat Engagement Process</div><span class="chevron">▶</span></div>
+        <div class="card-body">
+          <ul style="padding-left:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+            <li>Allow the customer time to respond after the initial automated response is sent.</li>
+            <li>If the customer does not reply to the automated message, this is the time to send a personalized response to engage them.</li>
+            <li>Ask one question at a time whenever possible to keep the conversation natural and customer-friendly.</li>
+            <li>Avoid sending multiple questions in a single message, as this can create pressure for the customer to provide several answers at once.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" id="chat-no-response">
+        <div class="card-header" onclick="toggleCard('chat-no-response')"><div class="card-title">⏱️ Process for Customers Who Are Not Responding</div><span class="chevron">▶</span></div>
+        <div class="card-body">
+          <ul style="padding-left:1.25rem;display:flex;flex-direction:column;gap:0.5rem;">
+            <li>After sending your response, allow the customer sufficient time to reply.</li>
+            <li>If there is no response after 5 minutes, consider the chat inactive.</li>
+            <li>Send the ghost spiel to re-engage the customer ("Are you still there?"), then wait for another 5 minutes for a response.</li>
+            <li>If there is still no response after the additional 5-minute waiting period, you may proceed with disconnecting the chat.</li>
+            <li>Before disconnecting, ensure a proper closing message is sent: ("We understand you may be unavailable at the moment. Feel free to reach out again if you still need assistance.")</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -2921,7 +2959,10 @@ const searchIndex = [
   // ── TOOLS & LOGINS ───────────────────────────────────────────────────────
   { section: 'tools', sectionLabel: 'Tools & Logins', title: 'CallTracking Metrics', desc: 'Login at app.calltrackingmetrics.com — call tracking platform.' },
   { section: 'tools', sectionLabel: 'Tools & Logins', title: 'Salesforce CRM', desc: 'Login at legacydetox.lightning.force.com — lead and call management.' },
-  { section: 'tools', sectionLabel: 'Tools & Logins', title: 'Legacy Form Tracker', desc: 'Google Form for tracking submissions. Link in Tools & Logins section.' },
+  { section: 'tools', sectionLabel: 'Tools & Logins', title: 'LHC Agent Dashboard', desc: 'Agent dashboard at lhcagentdashboard.onhercules.app/dashboard.' },
+  { section: 'tools', sectionLabel: 'Tools & Logins', title: 'LHC Knowledge Base', desc: 'Knowledge base at lhc-kb-theta.vercel.app.' },
+  { section: 'tools', sectionLabel: 'Tools & Logins', title: 'LHC Call Disposition Tracker', desc: 'Call disposition tracker at lhc-tracker.vercel.app.' },
+  { section: 'tools', sectionLabel: 'Tools & Logins', title: 'LHC Emailer Extension', desc: 'Emailer extension files on Google Drive.' },
   { section: 'tools', sectionLabel: 'Tools & Logins', title: 'Zoho Sales IQ Chat', desc: 'Chat platform at salesiq.zoho.com/legacyhealingcenter.' },
   { section: 'tools', sectionLabel: 'Tools & Logins', title: 'Legacy Email', desc: 'legacy@allianceglobalsolutions.com — password: ASTLEG@ags2025$' },
   { section: 'zoho-chat-dispos', sectionLabel: 'Zoho Chat Lead Dispos', title: 'Zoho Chat Lead Source Mapping', desc: 'Legacy Healing Mental Health = BB MH CHAT. Legacy NJ = BB3 Chats. Getting America Help = TNT Chat. Legacy Chat = Legacy Healing Chat.' },
@@ -2942,6 +2983,8 @@ const searchIndex = [
   { section: 'reminders', sectionLabel: 'Call Reminders', title: 'Citadel 12', desc: 'Open the call as Citadel 12.' },
   { section: 'reminders', sectionLabel: 'Call Reminders', title: 'Insurance Segment Script', desc: 'How do you receive that insurance? Is it through work, a family member, do you pay monthly or is it through Medicaid/Medicare?' },
   { section: 'reminders', sectionLabel: 'Call Reminders', title: 'How do you receive insurance', desc: 'Ask: Is it through work, a family member, monthly payment, or Medicaid/Medicare?' },
+  { section: 'chat-reminders', sectionLabel: 'Chat Reminders', title: 'Chat Engagement Process', desc: 'Allow time after the automated response, send a personalized message if no reply, and ask one question at a time.' },
+  { section: 'chat-reminders', sectionLabel: 'Chat Reminders', title: 'Process for Customers Who Are Not Responding', desc: 'Wait 5 minutes, send the ghost spiel, wait another 5 minutes, then disconnect with a proper closing message.' },
   // ── TRANSFER NUMBERS ─────────────────────────────────────────────────────
   { section: 'transfer', sectionLabel: 'Transfer Numbers', title: 'Primary Transfer Line', desc: '754-233-1899 — qualified transfer to admissions specialist.' },
   { section: 'transfer', sectionLabel: 'Transfer Numbers', title: 'Secondary Transfer Line', desc: '561-448-9363 — use when primary line is unavailable. Managers line.' },
