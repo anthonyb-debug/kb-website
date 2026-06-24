@@ -1514,11 +1514,11 @@
       </div>
       <div class="chatter-item">
         <div class="chatter-tag">@Missed Call Follow Up</div>
-        <div class="chatter-desc">Unsuccessful transfer; insurance information was gathered, but no one answered.</div>
+        <div class="chatter-desc">For all hang-up scenarios and for cases where the caller disconnects but has already provided their insurance information.</div>
       </div>
       <div class="chatter-item">
         <div class="chatter-tag">@Callbacks</div>
-        <div class="chatter-desc">Unsuccessful transfer without insurance information but qualified.</div>
+        <div class="chatter-desc">For all scheduled callback or client requests for callback and whenever the caller disconnects without providing any insurance information.</div>
       </div>
       <div class="chatter-item">
         <div class="chatter-tag">@Refer Out</div>
@@ -2787,10 +2787,30 @@
       <!-- LATEST TRICARE/IEHP update -->
       <div class="section-actions"><button class="sec-btn" onclick="expandAllInSection(this)">▼ Expand All</button><button class="sec-btn" onclick="collapseAllInSection(this)">▲ Collapse All</button></div>
 
+      <!-- UPDATE 6.24.26 -->
+      <div class="card" id="upd-624" style="border-left:3px solid var(--accent);">
+        <div class="card-header" onclick="toggleCard('upd-624')">
+          <div class="card-title"><span style="color:var(--gold);font-size:0.75rem;font-weight:700;margin-right:0.5rem;">LATEST</span><span style="color:var(--muted);font-size:0.75rem;font-weight:600;margin-right:0.5rem;">6.24.26</span> Salesforce Chatter — Missed Call Follow Ups &amp; Callbacks</div>
+          <span class="chevron">▶</span>
+        </div>
+        <div class="card-body">
+          <div style="display:flex;flex-direction:column;gap:0.6rem;">
+            <div class="chatter-item" style="margin-bottom:0;">
+              <div class="chatter-tag">@Missed Call Follow Ups</div>
+              <div class="chatter-desc">For all hang-up scenarios and for cases where the caller disconnects but has already provided their insurance information.</div>
+            </div>
+            <div class="chatter-item" style="margin-bottom:0;">
+              <div class="chatter-tag">@Callbacks</div>
+              <div class="chatter-desc">For all scheduled callback or client requests for callback and whenever the caller disconnects without providing any insurance information.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- PPC AND MAP CALLS -->
       <div class="card" id="upd-ppc-map" style="border-left:3px solid var(--green);">
         <div class="card-header" onclick="toggleCard('upd-ppc-map')">
-          <div class="card-title"><span style="color:var(--gold);font-size:0.75rem;font-weight:700;margin-right:0.5rem;">LATEST</span> PPC and Map Calls — Transfer &amp; Qualification Guidelines</div>
+          <div class="card-title"><span style="color:var(--muted);font-size:0.75rem;font-weight:600;margin-right:0.5rem;"></span> PPC and Map Calls — Transfer &amp; Qualification Guidelines</div>
           <span class="chevron">▶</span>
         </div>
         <div class="card-body">
@@ -3404,8 +3424,8 @@ const searchIndex = [
   { section: 'zoho-chat-dispos', sectionLabel: 'Zoho Chat Lead Dispos', title: 'TNT Chat', desc: 'Getting America Help chat maps to TNT Chat lead source in Salesforce.' },
   { section: 'zoho-chat-dispos', sectionLabel: 'Zoho Chat Lead Dispos', title: 'BB3 Chats', desc: 'Legacy Healing NJ chat maps to BB3 Chats lead source in Salesforce.' },
   // ── CHATTER TAGS ─────────────────────────────────────────────────────────
-  { section: 'chatter', sectionLabel: 'Salesforce Chatter', title: '@Missed Call Follow Up', desc: 'Unsuccessful transfer; insurance was gathered but no one answered. Tag in Salesforce.' },
-  { section: 'chatter', sectionLabel: 'Salesforce Chatter', title: '@Callbacks', desc: 'Unsuccessful transfer without insurance info but caller was qualified.' },
+  { section: 'chatter', sectionLabel: 'Salesforce Chatter', title: '@Missed Call Follow Up', desc: 'For all hang-up scenarios and for cases where the caller disconnects but has already provided their insurance information.' },
+  { section: 'chatter', sectionLabel: 'Salesforce Chatter', title: '@Callbacks', desc: 'For all scheduled callback or client requests for callback and whenever the caller disconnects without providing any insurance information.' },
   { section: 'chatter', sectionLabel: 'Salesforce Chatter', title: '@Refer Out', desc: 'Referring caller to an outside provider or resource such as SAMHSA.' },
   { section: 'chatter', sectionLabel: 'Salesforce Chatter', title: '@Private Pay Follow Up', desc: 'Caller can pay out-of-pocket for services. Self-pay rate $10,000/week.' },
   { section: 'chatter', sectionLabel: 'Salesforce Chatter', title: '@CCC Group & @Fronters', desc: 'Include BOTH tags for SEO and PPC lead source callbacks.' },
@@ -3543,6 +3563,7 @@ const searchIndex = [
   ...['Adam Brown','Alec Menchaca','Alex Chattaway','Christopher Spagna','Evan Johnston','Logan Buehler','Nicole Sanstrom','Richard Reilly','Travis Henderson'].map(n => ({ section: 'agents', sectionLabel: 'Agent Directory', title: n, desc: 'Closer' })),
   ...['Mike D','Mike Burke','Ally Trim','Justin Greenburg','Dennis Feinstein','Kellie Stohes','Phil Ohara','Brad Silver','Christina Holmes','Travis Benefida','Joe Kelley'].map(n => ({ section: 'agents', sectionLabel: 'Agent Directory', title: n, desc: 'BD Rep' })),
   // Campaign Updates
+  { section: 'updates', sectionLabel: 'Campaign Updates', title: 'Salesforce Chatter — Missed Call Follow Ups & Callbacks (6.24.26)', desc: '@Missed Call Follow Ups: hang-up scenarios and callers who disconnect after providing insurance. @Callbacks: scheduled callbacks, client callback requests, and callers who disconnect without providing insurance.' },
   { section: 'updates', sectionLabel: 'Campaign Updates', title: 'PPC and Map Calls — Transfer & Qualification Guidelines', desc: 'Transfer first. If unavailable, gather: reason for treatment, substances, insurance, location, contact info, immediate needs. Transfer immediately if closer becomes available.' },
   { section: 'updates', sectionLabel: 'Campaign Updates', title: 'Self-Pay Rate $10,000/week (4.30.26)', desc: 'Private pay is now $10,000 per week. Previously $8,000. Tag @Private Pay Follow Up.' },
   { section: 'updates', sectionLabel: 'Campaign Updates', title: 'Tricare EAST — Transfer to Specialist', desc: 'Tricare EAST or unsure type: gather info and transfer. Other Tricare: refer out. IEHP: pitch self-pay.' },
