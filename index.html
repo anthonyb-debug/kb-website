@@ -1474,6 +1474,7 @@
             <tr><td class="label">Legacy Chat</td><td class="desc">Legacy Healing Chat</td></tr>
             <tr><td class="label">Legacy Healing LA</td><td class="desc">Legacy Healing LA Branded Chat (URL: home.legacy)</td></tr>
             <tr><td class="label">Getting America Help</td><td class="desc">TNT Chat</td></tr>
+            <tr><td class="label">Admission Specialist</td><td class="desc">DCF Chat</td></tr>
           </tbody>
         </table>
       </div>
@@ -1531,6 +1532,10 @@
       <div class="chatter-item" style="border-left-color: var(--gold);">
         <div class="chatter-tag" style="color: var(--gold);">@CCC Group &amp; @Fronters</div>
         <div class="chatter-desc">Include <strong style="color:var(--text);">both</strong> tags when tagging a callback for <strong style="color:var(--text);">SEO</strong> and <strong style="color:var(--text);">PPC</strong> lead sources.</div>
+      </div>
+      <div class="chatter-item" style="border-left-color: var(--gold);">
+        <div class="chatter-tag" style="color: var(--gold);">@Referrals</div>
+        <div class="chatter-desc">Use for all Kaiser Insurance callers/chats after gathering insurance information.</div>
       </div>
     </div>
 
@@ -2787,10 +2792,26 @@
       <!-- LATEST TRICARE/IEHP update -->
       <div class="section-actions"><button class="sec-btn" onclick="expandAllInSection(this)">▼ Expand All</button><button class="sec-btn" onclick="collapseAllInSection(this)">▲ Collapse All</button></div>
 
+      <!-- UPDATE 7.9.26 -->
+      <div class="card" id="upd-709" style="border-left:3px solid var(--accent);">
+        <div class="card-header" onclick="toggleCard('upd-709')">
+          <div class="card-title"><span style="color:var(--gold);font-size:0.75rem;font-weight:700;margin-right:0.5rem;">LATEST</span><span style="color:var(--muted);font-size:0.75rem;font-weight:600;margin-right:0.5rem;">7.9.26</span> All Kaiser Insurance — Gather Info &amp; Tag @Referrals</div>
+          <span class="chevron">▶</span>
+        </div>
+        <div class="card-body">
+          <div style="background:var(--surface2);border-left:3px solid var(--gold);border-radius:0 6px 6px 0;padding:0.75rem 1rem;">
+            For <strong style="color:var(--gold);">all Kaiser Insurance</strong> callers/chats, gather their insurance information.
+          </div>
+          <div style="background:var(--surface2);border-radius:6px;padding:0.75rem 1rem;font-size:0.85rem;margin-top:0.6rem;">
+            Once insurance info is collected → tag <span style="color:var(--gold);">@referrals</span> in SF Chatter.
+          </div>
+        </div>
+      </div>
+
       <!-- UPDATE 6.24.26 -->
       <div class="card" id="upd-624" style="border-left:3px solid var(--accent);">
         <div class="card-header" onclick="toggleCard('upd-624')">
-          <div class="card-title"><span style="color:var(--gold);font-size:0.75rem;font-weight:700;margin-right:0.5rem;">LATEST</span><span style="color:var(--muted);font-size:0.75rem;font-weight:600;margin-right:0.5rem;">6.24.26</span> Salesforce Chatter — Missed Call Follow Ups &amp; Callbacks</div>
+          <div class="card-title"><span style="color:var(--muted);font-size:0.75rem;font-weight:600;margin-right:0.5rem;">6.24.26</span> Salesforce Chatter — Missed Call Follow Ups &amp; Callbacks</div>
           <span class="chevron">▶</span>
         </div>
         <div class="card-body">
@@ -3423,12 +3444,14 @@ const searchIndex = [
   { section: 'zoho-chat-dispos', sectionLabel: 'Zoho Chat Lead Dispos', title: 'Zoho Chat Lead Source Mapping', desc: 'Legacy Healing Mental Health = BB MH CHAT. Legacy NJ = BB3 Chats. Getting America Help = TNT Chat. Legacy Chat = Legacy Healing Chat.' },
   { section: 'zoho-chat-dispos', sectionLabel: 'Zoho Chat Lead Dispos', title: 'TNT Chat', desc: 'Getting America Help chat maps to TNT Chat lead source in Salesforce.' },
   { section: 'zoho-chat-dispos', sectionLabel: 'Zoho Chat Lead Dispos', title: 'BB3 Chats', desc: 'Legacy Healing NJ chat maps to BB3 Chats lead source in Salesforce.' },
+  { section: 'zoho-chat-dispos', sectionLabel: 'Zoho Chat Lead Dispos', title: 'DCF Chat', desc: 'Admission Specialist chat source maps to DCF Chat lead source in Salesforce.' },
   // ── CHATTER TAGS ─────────────────────────────────────────────────────────
   { section: 'chatter', sectionLabel: 'Salesforce Chatter', title: '@Missed Call Follow Up', desc: 'For all hang-up scenarios and for cases where the caller disconnects but has already provided their insurance information.' },
   { section: 'chatter', sectionLabel: 'Salesforce Chatter', title: '@Callbacks', desc: 'For all scheduled callback or client requests for callback and whenever the caller disconnects without providing any insurance information.' },
   { section: 'chatter', sectionLabel: 'Salesforce Chatter', title: '@Refer Out', desc: 'Referring caller to an outside provider or resource such as SAMHSA.' },
   { section: 'chatter', sectionLabel: 'Salesforce Chatter', title: '@Private Pay Follow Up', desc: 'Caller can pay out-of-pocket for services. Self-pay rate $10,000/week.' },
   { section: 'chatter', sectionLabel: 'Salesforce Chatter', title: '@CCC Group & @Fronters', desc: 'Include BOTH tags for SEO and PPC lead source callbacks.' },
+  { section: 'chatter', sectionLabel: 'Salesforce Chatter', title: '@Referrals', desc: 'Use for all Kaiser Insurance callers/chats after gathering insurance information.' },
   { section: 'chatter', sectionLabel: 'Salesforce Chatter', title: 'Chatter Tags Overview', desc: 'Salesforce tags: Missed Call Follow Up, Callbacks, Refer Out, Private Pay Follow Up, CCC Group, Fronters.' },
   // ── CALL REMINDERS ───────────────────────────────────────────────────────
   { section: 'reminders', sectionLabel: 'Call Reminders', title: 'Business Development Call', desc: 'BD call — no need to qualify. Transfer immediately.' },
@@ -3563,6 +3586,7 @@ const searchIndex = [
   ...['Adam Brown','Alec Menchaca','Alex Chattaway','Christopher Spagna','Evan Johnston','Logan Buehler','Nicole Sanstrom','Richard Reilly','Travis Henderson'].map(n => ({ section: 'agents', sectionLabel: 'Agent Directory', title: n, desc: 'Closer' })),
   ...['Mike D','Mike Burke','Ally Trim','Justin Greenburg','Dennis Feinstein','Kellie Stohes','Phil Ohara','Brad Silver','Christina Holmes','Travis Benefida','Joe Kelley'].map(n => ({ section: 'agents', sectionLabel: 'Agent Directory', title: n, desc: 'BD Rep' })),
   // Campaign Updates
+  { section: 'updates', sectionLabel: 'Campaign Updates', title: 'All Kaiser Insurance — Gather Info & Tag @Referrals (7.9.26)', desc: 'For all Kaiser Insurance callers/chats, gather insurance information and tag @referrals in SF Chatter.' },
   { section: 'updates', sectionLabel: 'Campaign Updates', title: 'Salesforce Chatter — Missed Call Follow Ups & Callbacks (6.24.26)', desc: '@Missed Call Follow Ups: hang-up scenarios and callers who disconnect after providing insurance. @Callbacks: scheduled callbacks, client callback requests, and callers who disconnect without providing insurance.' },
   { section: 'updates', sectionLabel: 'Campaign Updates', title: 'PPC and Map Calls — Transfer & Qualification Guidelines', desc: 'Transfer first. If unavailable, gather: reason for treatment, substances, insurance, location, contact info, immediate needs. Transfer immediately if closer becomes available.' },
   { section: 'updates', sectionLabel: 'Campaign Updates', title: 'Self-Pay Rate $10,000/week (4.30.26)', desc: 'Private pay is now $10,000 per week. Previously $8,000. Tag @Private Pay Follow Up.' },
