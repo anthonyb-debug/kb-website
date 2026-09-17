@@ -436,6 +436,80 @@ const C = {
 /* ---------- KNOWLEDGE BASE CONTENT (Legacy Healing — Agent Portal) ---------- */
 const ARTICLES = [
 
+  /* ========== QUICK CALL CHEAT SHEET ========== */
+  {
+    id:'cheat-sheet', cat:'Getting Started', icon:'zap', title:'Agent Quick Call Cheat Sheet',
+    author:'Legacy Healing — Call Handling & Compliance', updated:'Sep 17, 2026', read:4,
+    tags:['cheat sheet','quick reference','compliance','ppc','map lead','level of care','medical advice','location','transfer','document','salesforce','dont say','on call'],
+    excerpt:'Quick reference while a caller is on the line — what to say, what never to say, and what to document.',
+    body:()=>`
+      ${C.callout('success','★ The 10-second reminder','<div class="font-700 text-[.95rem] tracking-wide" style="color:var(--text)">UNDERSTAND → QUALIFY → VERIFY → DOCUMENT → NEXT STEP</div><div class="mt-1.5">When unsure: <b>don’t guess. Ask.</b></div><div class="text-xs mt-1" style="color:var(--text-3)">Accurate information • Proper qualification • Compliance • Complete documentation</div>')}
+
+      <h2 id="cs-start">1 · Start the call</h2>
+      ${C.script('Opening', `<span class="say">“Thank you for calling. My name is [Name]. How can I help you today?”</span>`)}
+      <p>Then ask:</p>
+      ${C.script('Then ask', `<span class="say">“Can you tell me a little more about what you’re looking for?”</span><br><span class="say">“Are you looking for help for yourself or for a loved one?”</span>`)}
+      ${C.callout('warn','Tip','Start broad. Understand the situation before asking about a specific level of care.')}
+
+      <h2 id="cs-ppc">2 · PPC &amp; Map leads</h2>
+      ${C.callout('danger','Qualify first — do not automatically transfer','PPC / Map Lead → <b>Qualify</b> → <b>Insurance</b> → <b>Document</b> → follow current process.')}
+      ${C.script('Use', `<span class="say">“Absolutely, I can help you with that. Let me get some information from you so we can determine the best next step.”</span>`)}
+
+      <h2 id="cs-loc">3 · Level of care</h2>
+      <div class="grid sm:grid-cols-2 gap-4 mb-3">
+        <div>
+          <div class="font-600 text-sm mb-2" style="color:#DC2626">Don’t lead with</div>
+          ${C.xlist(['“Do you need detox?”','“Are you looking for inpatient?”','“Do you need outpatient?”'])}
+        </div>
+        <div>
+          <div class="font-600 text-sm mb-2" style="color:var(--green)">Use instead</div>
+          ${C.checklist(['“Can you tell me a little more about what you’re looking for?”'])}
+        </div>
+      </div>
+      <p>If they specifically ask about a level of care:</p>
+      ${C.script('Response', `<span class="say">“We can certainly help you look into your options. Let me gather some information first so we can determine what may be available.”</span>`)}
+      ${C.callout('warn','Remember','Don’t make promises or commitments before the appropriate qualification / verification.')}
+
+      <h2 id="cs-insurance">4 · Insurance / qualification</h2>
+      ${C.script('Ask for insurance', `<span class="say">“To help us determine what options may be available, may I get your insurance information?”</span>`)}
+      <p>If the caller wants immediate placement:</p>
+      ${C.script('Slow it down', `<span class="say">“I understand you’re looking for help as soon as possible. Let me first gather the information we need so we can determine what options may be available.”</span>`)}
+      ${C.callout('danger','Never promise','<b>Admission</b> • <b>Availability</b> • <b>Coverage</b> • <b>A specific facility</b> • <b>A specific level of care</b>')}
+
+      <h2 id="cs-location">5 · Location questions</h2>
+      ${C.callout('danger','Important compliance point','Service area ≠ physical facility. Never imply Legacy owns a building somewhere it doesn’t.')}
+      <div class="grid sm:grid-cols-2 gap-4 mb-3">
+        <div>
+          <div class="font-600 text-sm mb-2" style="color:#DC2626">Don’t say</div>
+          ${C.xlist(['“We have a facility in every city/state.”'])}
+        </div>
+        <div>
+          <div class="font-600 text-sm mb-2" style="color:var(--green)">Say</div>
+          ${C.checklist(['“We service every city and every state.”','“We can help people nationwide.”','“We service clients coast to coast.”'])}
+        </div>
+      </div>
+      <p>If asked about a specific city:</p>
+      ${C.script('Specific city', `<span class="say">“We service clients in [City/State]. Let me gather some information so we can determine what options may be available.”</span>`)}
+
+      <h2 id="cs-medical">6 · Medical questions</h2>
+      ${C.callout('danger','Do not give medical advice','Applies to medication, substances, safety, dosage, withdrawal — anything clinical.')}
+      ${C.script('Deflect to a specialist', `<span class="say">“I’m not a medical professional, so I wouldn’t want to give you medical advice. I can help connect you with a specialist who can better address that question.”</span>`)}
+      ${C.xlist(['Recommend medication','Give dosage instructions','Say whether a medication is safe','Diagnose the caller or make medical recommendations'])}
+
+      <h2 id="cs-person">7 · Specific person / patient request</h2>
+      <p>If a caller asks: <i>“Can you transfer me to Sarah?”</i> — first ask:</p>
+      ${C.script('First ask', `<span class="say">“Certainly. May I ask who Sarah is and what you’re calling regarding?”</span>`)}
+      ${C.xlist(['Confirm someone is a patient','Disclose protected information','Transfer without following the appropriate process'])}
+      <p>When unsure:</p>
+      ${C.script('When unsure', `<span class="say">“Let me verify the appropriate process for that request before I proceed.”</span>`)}
+
+      <h2 id="cs-document">8 · Document in Salesforce</h2>
+      <p>Before completing the interaction, make sure the relevant information is documented.</p>
+      ${C.checklist(['Caller information','Reason for call','Qualification details','Insurance information','Important requests / concerns','Relevant notes for the closer / specialist','Correct disposition'])}
+      ${C.callout('info','Rule of thumb','If it’s important for the next person handling the lead → <b>document it.</b>')}
+    `,
+  },
+
   /* ========== GETTING STARTED ========== */
   {
     id:'welcome', cat:'Getting Started', icon:'sunrise', title:'Agent Portal',
@@ -996,6 +1070,7 @@ const ARTICLES = [
 const NAV = [
   {section:null, items:[{id:'dashboard', label:'Dashboard', icon:'layout-dashboard'}]},
   {section:'Getting Started', items:[
+    {id:'article:cheat-sheet', label:'Quick Call Cheat Sheet', icon:'zap'},
     {id:'article:welcome', label:'Agent Portal', icon:'sunrise'},
     {id:'article:terms', label:'Terms Glossary', icon:'book-a'},
     {id:'article:tools', label:'Tools & Logins', icon:'app-window'},
@@ -1116,7 +1191,7 @@ function renderDashboard(){
   setHeader(['Home'], 'Dashboard');
   hideRightPanel();
 
-  const popular = ['qualifying-script','insurance-qualification','dispo-sf','call-handling'].map(byId);
+  const popular = ['cheat-sheet','qualifying-script','insurance-qualification','dispo-sf'].map(byId);
   const recent = state.recentlyViewed.slice(0,4).map(byId);
   const updates = [...ARTICLES].sort((a,b)=> new Date(b.updated)-new Date(a.updated)).slice(0,4);
 
@@ -1134,14 +1209,15 @@ function renderDashboard(){
           <p class="text-white/85 mt-2 text-sm max-w-md">Press <span class="kbd" style="background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.25);color:#fff">⌘</span> <span class="kbd" style="background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.25);color:#fff">K</span> to search mid-call. Jump into a script below to get started.</p>
           <div class="flex flex-wrap gap-2.5 mt-5">
             <button onclick="openCmdK()" class="btn" style="background:#fff;color:var(--green-dark)"><i data-lucide="search" class="w-4 h-4"></i> Quick search</button>
+            <button onclick="openArticle('cheat-sheet')" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3)"><i data-lucide="zap" class="w-4 h-4"></i> Cheat sheet</button>
             <button onclick="openArticle('qualifying-script')" class="btn" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3)"><i data-lucide="phone-incoming" class="w-4 h-4"></i> Qualifying script</button>
           </div>
         </div>
       </div>
 
       <!-- quick links -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-        ${[['Qualifying','qualifying-script','phone-incoming'],['Insurance','insurance-qualification','shield-check'],['Dispos','dispo-sf','tags'],['Phones','phones','map-pin']].map(([n,id,ic])=>`
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">
+        ${[['Cheat Sheet','cheat-sheet','zap'],['Qualifying','qualifying-script','phone-incoming'],['Insurance','insurance-qualification','shield-check'],['Dispos','dispo-sf','tags'],['Phones','phones','map-pin']].map(([n,id,ic])=>`
           <button onclick="openArticle('${id}')" class="kcard kcard-hover p-4 text-left">
             <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-2.5" style="background:var(--green-soft)"><i data-lucide="${ic}" class="w-[18px] h-[18px]" style="color:var(--green)"></i></div>
             <div class="font-600 text-sm" style="color:var(--text)">${n}</div>
