@@ -266,27 +266,146 @@
     #sidebar { position:fixed; z-index:50; top:0; bottom:0; left:0; transform:translateX(-100%); transition:transform .3s ease; width:264px !important; }
     #sidebar.drawer-open { transform:translateX(0); }
   }
+
+  /* ============ SIGN-IN GATE (split screen) ============ */
+  #authGate { position: fixed; inset: 0; z-index: 100; display: flex; align-items: stretch; overflow-y: auto; background: var(--surface); }
+  .kbg-aside {
+    position: relative; isolation: isolate; overflow: hidden;
+    flex: 0 0 46%; max-width: 700px;
+    display: flex; flex-direction: column; justify-content: space-between; gap: 48px;
+    padding: 44px 56px;
+    background: linear-gradient(155deg, #071325 0%, #0E2747 52%, #14508F 100%);
+    color: #E6EEF0;
+  }
+  .kbg-aside::after { content: ""; position: absolute; inset: 0 0 auto 0; height: 1px; background: rgba(255,255,255,.08); }
+  .kbg-motif { position: absolute; z-index: -1; pointer-events: none; color: #fff; }
+  .kbg-motif-leaf { right: -170px; bottom: -190px; width: 560px; height: 560px; opacity: .08; transform: rotate(-12deg); }
+  .kbg-motif-pulse { left: -40px; right: -40px; bottom: 72px; width: calc(100% + 80px); height: auto; opacity: .1; }
+  .kbg-brand { display: flex; align-items: center; gap: 12px; }
+  .kbg-mark {
+    width: 42px; height: 42px; border-radius: 12px; flex-shrink: 0;
+    display: grid; place-items: center; color: #fff;
+    background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.2);
+  }
+  .kbg-mark svg { width: 22px; height: 22px; }
+  .kbg-brand-name { font-family: 'Poppins', system-ui, sans-serif; font-size: 17px; font-weight: 600; color: #fff; line-height: 1.2; letter-spacing: -.01em; }
+  .kbg-brand-sub { font-size: 12px; color: rgba(230,238,240,.62); margin-top: 2px; }
+  .kbg-pitch { max-width: 460px; }
+  .kbg-pitch h2 {
+    font-family: 'Poppins', system-ui, sans-serif; font-size: clamp(27px, 2.5vw, 35px);
+    line-height: 1.18; font-weight: 600; letter-spacing: -.025em; margin: 0 0 14px; color: #fff;
+  }
+  .kbg-pitch > p { font-size: 15px; line-height: 1.6; margin: 0; color: rgba(230,238,240,.72); }
+  .kbg-points { list-style: none; margin: 34px 0 0; padding: 0; display: grid; gap: 18px; }
+  .kbg-points li { display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: start; }
+  .kbg-pt-icon {
+    width: 36px; height: 36px; border-radius: 9px; display: grid; place-items: center;
+    background: rgba(125,184,248,.14); color: rgb(125,184,248); box-shadow: inset 0 0 0 1px rgba(125,184,248,.24);
+  }
+  .kbg-pt-icon svg { width: 17px; height: 17px; }
+  .kbg-points strong { display: block; font-size: 14px; font-weight: 600; color: #fff; margin-top: 1px; }
+  .kbg-points span { display: block; font-size: 13px; line-height: 1.5; color: rgba(230,238,240,.62); margin-top: 2px; }
+  .kbg-aside-foot { font-size: 12px; color: rgba(230,238,240,.5); }
+
+  .kbg-main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; padding: 28px 32px; background: var(--surface); }
+  .kbg-form-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 0; }
+  .kbg-card { width: 100%; max-width: 360px; animation: kbg-in .45s cubic-bezier(.16,1,.3,1) both; }
+  @keyframes kbg-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .kbg-mobile-brand { display: none; }
+  .kbg-title { font-family: 'Poppins', system-ui, sans-serif; font-size: 28px; line-height: 1.2; font-weight: 600; letter-spacing: -.02em; margin: 0; color: var(--text); }
+  .kbg-sub { font-size: 14px; line-height: 1.55; color: var(--text-2); margin: 10px 0 0; }
+  #authGate, #authGate * { box-sizing: border-box; }
+  #gBtn:empty { display: none; }
+  #gBtn { display: flex; justify-content: flex-start; margin-top: 30px; min-height: 44px; }
+  #authErr {
+    margin-top: 14px; padding: 11px 13px; border-radius: 8px;
+    font-size: 12.5px; font-weight: 500; line-height: 1.5; color: var(--text) !important;
+    background: rgba(220,38,38,.1); box-shadow: inset 3px 0 0 #DC2626;
+  }
+  #demoBox { margin-top: 20px; padding: 14px; border-radius: 10px; border: 1px dashed var(--line); }
+  #demoBox .btn { margin-top: 2px; }
+  .kbg-divider { height: 1px; background: var(--line); margin: 30px 0 18px; }
+  .kbg-note { display: flex; align-items: flex-start; gap: 9px; font-size: 12.5px; line-height: 1.5; color: var(--text-2); }
+  .kbg-note + .kbg-note { margin-top: 12px; }
+  .kbg-note svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; color: var(--text-3); }
+  .kbg-note:first-of-type svg { color: var(--green); }
+  .kbg-note b { font-weight: 600; color: var(--text); }
+  .kbg-foot { font-size: 12px; color: var(--text-3); text-align: center; }
+  @media (max-width: 1100px) { .kbg-aside { flex-basis: 42%; padding: 40px; } }
+  @media (max-width: 860px) {
+    .kbg-aside { display: none; }
+    .kbg-main { padding: 20px 20px 22px; }
+    .kbg-form-wrap { align-items: flex-start; padding: 4px 0 32px; }
+    .kbg-mobile-brand {
+      display: flex; align-items: center; gap: 12px; margin: 0 0 28px; padding: 12px 16px; border-radius: 12px;
+      background: linear-gradient(120deg, #071325 0%, #0E2747 55%, #14508F 100%);
+    }
+    .kbg-mobile-brand .kbg-mark { width: 36px; height: 36px; border-radius: 10px; }
+    .kbg-mobile-brand .kbg-mark svg { width: 19px; height: 19px; }
+    .kbg-mobile-brand .kbg-brand-name { font-size: 15px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .kbg-card { animation: none; } }
 </style>
 </head>
 <body class="font-body antialiased">
 
 <!-- ============ SIGN-IN GATE ============ -->
-<div id="authGate" class="fixed inset-0 z-[100] flex items-center justify-center px-4" style="background:linear-gradient(160deg,var(--green-dark),#091827)">
-  <div class="w-full max-w-sm rounded-2xl p-8 text-center" style="background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-lg)">
-    <div class="w-14 h-14 rounded-2xl mx-auto flex items-center justify-center mb-4" style="background:linear-gradient(140deg,var(--green-mid),var(--green-dark))">
-      <i data-lucide="heart-pulse" class="w-7 h-7 text-white"></i>
+<div id="authGate">
+  <aside class="kbg-aside">
+    <svg class="kbg-motif kbg-motif-pulse" viewBox="0 0 600 160" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M0 100h170l14-28 22 58 26-110 20 80 12-24h336"/></svg>
+    <div class="kbg-brand">
+        <div class="kbg-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg></div>
+        <div><div class="kbg-brand-name">Legacy Healing</div><div class="kbg-brand-sub">Knowledge Base</div></div>
     </div>
-    <h1 class="font-display font-700 text-xl" style="color:var(--text)">Legacy Healing</h1>
-    <p class="text-sm" style="color:var(--text-3)">Knowledge Base — Agent Portal</p>
-    <p class="text-sm mt-5 mb-5" style="color:var(--text-2)">Sign in with your @allianceglobalsolutions.com account to continue.</p>
-    <div id="gBtn" class="flex justify-center"></div>
-    <div id="authErr" class="text-sm mt-3" style="color:#DC2626;display:none"></div>
-    <div id="demoBox" style="display:none" class="mt-5">
-      <div class="text-xs mb-2" style="color:var(--text-3)">Google Sign-In isn't configured for this environment.</div>
-      <button onclick="demoEnter()" class="btn btn-ghost w-full justify-center"><i data-lucide="eye" class="w-4 h-4"></i> Preview in demo mode</button>
+    <div class="kbg-pitch">
+      <h2>The right answer, with the caller still on the line.</h2>
+      <p>The agent portal for Legacy Healing: call scripts, insurance guidance and contacts, all in one searchable place.</p>
+      <ul class="kbg-points">
+        <li>
+          <div class="kbg-pt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg></div>
+          <div><strong>Call scripts</strong><span>Openers, qualifying questions and closes for every call type.</span></div>
+        </li>
+        <li>
+          <div class="kbg-pt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div>
+          <div><strong>Insurance and reference</strong><span>Coverage basics and quick reference for common questions.</span></div>
+        </li>
+        <li>
+          <div class="kbg-pt-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5"/><path d="M21 3l-7 7"/><path d="M19 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h6"/></svg></div>
+          <div><strong>Salesforce and dispositions</strong><span>How to log each call, plus tools, logins and the directory.</span></div>
+        </li>
+      </ul>
     </div>
-    <p class="text-[11px] mt-6" style="color:var(--text-3)">Internal use only · Confidential</p>
-  </div>
+    <div class="kbg-aside-foot">&copy; <span id="kbgYear">2026</span> Alliance Global Solutions</div>
+  </aside>
+
+  <main class="kbg-main">
+    <div class="kbg-form-wrap">
+      <div class="kbg-card">
+        <div class="kbg-mobile-brand">
+        <div class="kbg-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg></div>
+        <div><div class="kbg-brand-name">Legacy Healing</div><div class="kbg-brand-sub">Knowledge Base</div></div>
+        </div>
+        <h1 class="kbg-title">Sign in</h1>
+        <p class="kbg-sub">Use your company Google account to open the Legacy Healing Knowledge Base.</p>
+        <div id="gBtn"></div>
+        <div id="authErr" role="alert" style="display:none"></div>
+        <div id="demoBox" style="display:none">
+          <div class="text-xs mb-2" style="color:var(--text-3)">Google Sign-In isn't configured for this environment.</div>
+          <button onclick="demoEnter()" class="btn btn-ghost w-full justify-center"><i data-lucide="eye" class="w-4 h-4"></i> Preview in demo mode</button>
+        </div>
+        <div class="kbg-divider"></div>
+        <div class="kbg-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          <span>Only <b>@allianceglobalsolutions.com</b> accounts can sign in.</span>
+        </div>
+        <div class="kbg-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <span>Internal use only. Content in this knowledge base is confidential.</span>
+        </div>
+      </div>
+    </div>
+    <div class="kbg-foot">Secured with Google sign-in</div>
+  </main>
 </div>
 
 
@@ -1769,7 +1888,7 @@ function initAuth(){
     if(ALLOWED_DOMAIN) cfg.hosted_domain=ALLOWED_DOMAIN;
     google.accounts.id.initialize(cfg);
     const btn=document.getElementById('gBtn');
-    if(btn) google.accounts.id.renderButton(btn,{ theme:'filled_blue', size:'large', shape:'pill', text:'signin_with', width:280 });
+    if(btn) google.accounts.id.renderButton(btn,{ theme:'outline', size:'large', shape:'rectangular', text:'signin_with', logo_alignment:'left', width:Math.min(360, Math.max(240, btn.clientWidth||360)) });
     google.accounts.id.prompt();
   } else {
     const d=document.getElementById('demoBox'); if(d) d.style.display='block';
@@ -1785,6 +1904,7 @@ function startAuth(tries){
 }
 
 /* ---------- BOOT ---------- */
+{ const y=document.getElementById('kbgYear'); if(y) y.textContent=new Date().getFullYear(); }
 startAuth();
 </script>
 </body>
