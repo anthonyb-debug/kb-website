@@ -169,6 +169,27 @@
   html.dark .badge-success { color:#4ADE80; }
   .badge-danger  { background:color-mix(in srgb,#EF4444 15%,transparent); color:#DC2626; }
   html.dark .badge-danger { color:#F87171; }
+  /* Insurance quick lookup */
+  .ins-legend{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin:1rem 0}
+  .ins-card{border:1px solid var(--line);border-left-width:4px;border-radius:12px;padding:.8rem .95rem;background:var(--surface)}
+  .ins-card .k{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.25rem}
+  .ins-card .a{font-size:.88rem;color:var(--text-2);line-height:1.45}
+  .ins-ok{border-left-color:#22A559} .ins-ok .k{color:#15803D}
+  .ins-ref{border-left-color:#F59E0B} .ins-ref .k{color:#B45309}
+  .ins-no{border-left-color:#EF4444} .ins-no .k{color:#DC2626}
+  html.dark .ins-ok .k{color:#4ADE80} html.dark .ins-ref .k{color:#FBBF24} html.dark .ins-no .k{color:#F87171}
+  .ins-search{width:100%;padding:.7rem .95rem;border:1px solid var(--line);border-radius:12px;background:var(--surface-2);color:var(--text);font-size:.95rem;outline:none}
+  .ins-search:focus{border-color:var(--green)}
+  .ins-group{margin-top:1.1rem}
+  .ins-group-hd{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:.55rem}
+  .ins-grid{display:grid;gap:.45rem;grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
+  .ins-chip{border:1px solid var(--line);border-radius:10px;padding:.5rem .7rem;font-size:.88rem;color:var(--text);background:var(--surface)}
+  .ins-chip.ok{background:color-mix(in srgb,#22A559 7%,var(--surface))}
+  .ins-chip.ref{background:color-mix(in srgb,#F59E0B 9%,var(--surface))}
+  .ins-chip.no{background:color-mix(in srgb,#EF4444 7%,var(--surface))}
+  .ins-chip .n{font-weight:600}
+  .ins-chip .note{display:block;font-size:.75rem;color:var(--text-3);margin-top:.15rem}
+  .ins-empty{display:none;margin-top:1rem}
   /* Copyable phone numbers */
   .tel{ cursor:pointer; white-space:nowrap; color:var(--green-dark); font-weight:600; border-bottom:1px dashed color-mix(in srgb,var(--green) 55%,transparent); border-radius:4px; padding:0 2px; transition:background .15s; }
   .tel:hover{ background:var(--green-soft); }
@@ -552,6 +573,26 @@ const C = {
   accordion: (items) => items.map(s=>`<div class="acc-item" data-acc><button class="acc-head" onclick="toggleAcc(this)"><span>${s.t}</span><i data-lucide="chevron-down" class="w-5 h-5"></i></button><div class="acc-body"><div class="acc-body-inner">${s.body}</div></div></div>`).join(''),
 };
 
+/* ---------- INSURANCE QUICK LOOKUP DATA (VOB chart, Oct 2026) ---------- */
+const INS_LOOKUP = {
+  ok: ['Aetna','Alliant','AmeriHealth','Anthem',['Assurang Health Plan','Confirm with manager *'],['BCBS (any)','Can be placed in network'],'BCBS Alaska','BCBS Florida',['BCBS Michigan','Confirm with manager *'],'BCBS of California','Blue Care','Blue Select Silver','Care First','Cigna','Connecticare','Core Source','Empire',['Florida Blue','Only if paid monthly'],'GEHA','Harvard Pilgrim','Health First','Health Link','Health Partners','High Mark','Horizon','Key Benefit','Marketplace','Medica','Pomco','Premera BCBS','Regence BCBS','Sharp','Teamsters','UMR','Union Insurance','United Health Care'],
+  ref: [['BCBS Michigan','Confirm with manager *'],'Emblem Health','GHI','Golden Rule','Humana',['Keystone','Not Keystone First'],'Neighborhood Health','Pacific Source','Tribal / Native American','Tricare','Tufts','UPMC for You'],
+  no: ['Access','Access Medicaid','Ambetter','Amerigroup','Apple Health',['Assurant','Confirm with manager *'],['Avmed','If paid monthly, ask manager'],'Badger Care','Bridge Span','Buckeye','Care Source','CHIP','Coming Grounds','County Care','Family Care','Fidelis','Fremont Privileges','Gateway','Good Exchange','Harken Health','Health Net','Heinze & Associates','HIP','Husky Health','IHP','Kaiser','Kaiser Permanente',['Keystone First','Not Keystone'],'Mass-Health','Medi-Cal','Medicare','Mercy Health','Meridian','Molina','OHP','Paramount','Passport','Peach State Health Plan','Providence Plan','Qual Care','SS: Disability Insurance','State Insurance (any)','Tenn Care','VA Insurance','Well Care'],
+};
+function insChips(list, cls){
+  return list.map(x=>{ const [n,note]=Array.isArray(x)?x:[x,'']; 
+    return `<div class="ins-chip ${cls}" data-ins="${n.toLowerCase()}"><span class="n">${n}</span>${note?`<span class="note">${note}</span>`:''}</div>`; }).join('');
+}
+function filterIns(q){
+  q=q.trim().toLowerCase(); let total=0;
+  document.querySelectorAll('[data-ins-group]').forEach(g=>{
+    let shown=0;
+    g.querySelectorAll('.ins-chip').forEach(c=>{ const m=!q||c.dataset.ins.includes(q); c.style.display=m?'':'none'; if(m) shown++; });
+    g.style.display=shown?'':'none'; total+=shown;
+  });
+  const e=document.getElementById('insEmpty'); if(e) e.style.display=total?'none':'block';
+}
+
 /* ---------- KNOWLEDGE BASE CONTENT (Legacy Healing — Agent Portal) ---------- */
 const ARTICLES = [
 
@@ -880,6 +921,33 @@ const ARTICLES = [
 
   /* ========== INSURANCE ========== */
   {
+    id:'insurance-lookup', cat:'Insurance', icon:'search-check', title:'Insurance Quick Lookup',
+    author:'Insurance · VOB Chart', updated:'Oct 8, 2026', read:3,
+    tags:['insurance','lookup','vob','accepted','refer out','not accepted','referrals','aetna','cigna','anthem','bcbs','blue cross','florida blue','united health care','uhc','umr','humana','tricare','tufts','emblem','keystone','golden rule','kaiser','molina','ambetter','medicare','medicaid','medi-cal','va','avmed','assurant','health net','amerigroup'],
+    excerpt:'Revised VOB chart: find the plan, follow its color. Ask the source question first on every call.',
+    body:()=>`
+      <h2 id="source">1 · Ask the source question first</h2>
+      <p>Ask this on <b>every call</b>, even if the plan is on the Accepted list.</p>
+      ${C.script('Source question', `<span class="say">“How do you receive that insurance? Is it through work, a family member, do you pay monthly, or is it provided by the state?”</span>`)}
+      ${C.callout('danger','State-provided = not accepted','Medicaid, Medicare, VA, or any state plan is <b>not accepted</b>, no matter what name is on the card.')}
+      <h2 id="colors">2 · Find the plan and follow its color</h2>
+      <div class="ins-legend">
+        <div class="ins-card ins-ok"><div class="k">Accepted</div><div class="a">Confirmed not state-provided → <b>continue with VOB</b>.</div></div>
+        <div class="ins-card ins-ref"><div class="k">Refer out</div><div class="a">Not accepted, but we refer → <b>tag @Managers @Fronters</b>.</div></div>
+        <div class="ins-card ins-no"><div class="k">Not accepted</div><div class="a"><b>Offer cash pay.</b> Can’t afford it → give the SAMHSA number.</div></div>
+      </div>
+      <h2 id="lookup">3 · Look up a plan</h2>
+      <input class="ins-search" type="search" placeholder="Type a plan name, e.g. Humana, Florida Blue, Kaiser…" oninput="filterIns(this.value)" aria-label="Filter insurance plans">
+      <div class="ins-group" data-ins-group><div class="ins-group-hd"><span class="badge badge-success">Accepted (36)</span><span class="text-sm" style="color:var(--text-3)">Continue with VOB</span></div><div class="ins-grid">${insChips(INS_LOOKUP.ok,'ok')}</div></div>
+      <div class="ins-group" data-ins-group><div class="ins-group-hd"><span class="badge badge-amber">Refer out (12)</span><span class="text-sm" style="color:var(--text-3)">Not accepted · tag @Managers @Fronters</span></div><div class="ins-grid">${insChips(INS_LOOKUP.ref,'ref')}</div></div>
+      <div class="ins-group" data-ins-group><div class="ins-group-hd"><span class="badge badge-danger">Not accepted (45)</span><span class="text-sm" style="color:var(--text-3)">Offer cash pay · can’t afford → SAMHSA</span></div><div class="ins-grid">${insChips(INS_LOOKUP.no,'no')}</div></div>
+      <div id="insEmpty" class="ins-empty">${C.callout('warn','Not listed','Don’t guess. Ask @Managers.')}</div>
+      <h2 id="check">* Check with @Managers before quoting</h2>
+      ${C.checklist(['<b>BCBS Michigan</b> is on both the Accepted and Refer Out lists.','<b>Assurang Health Plan</b> (Accepted) may be the same carrier as <b>Assurant</b> (Not Accepted).','<b>Florida Blue</b> is accepted only if paid monthly. Through work or the state? Ask.','<b>Avmed</b> paid monthly needs a double check.'])}
+      ${C.callout('info','Referral tagging example','<i>@Managers @Fronters Referral: caller has Humana through their employer, needs refer out.</i>')}
+    `,
+  },
+  {
     id:'insurance-qualification', cat:'Insurance', icon:'shield-check', title:'Insurance Qualification',
     author:'Insurance', updated:'Jul 29, 2026', read:4,
     tags:['insurance','qualification','ppo','hmo','medicaid','self-pay'],
@@ -1138,10 +1206,11 @@ const ARTICLES = [
   },
   {
     id:'updates', cat:'Reference', icon:'megaphone', title:'Campaign Updates',
-    author:'Reference', updated:'Oct 6, 2026', read:4,
-    tags:['updates','campaign','lead source','lead owner','closed file','callbacks','missed call follow up','private pay','kaiser','self-pay','tricare','ambetter'],
+    author:'Reference', updated:'Oct 8, 2026', read:4,
+    tags:['updates','campaign','refer out','referrals','fronters','managers','lead source','lead owner','closed file','callbacks','missed call follow up','private pay','kaiser','self-pay','tricare','ambetter'],
     excerpt:'The latest standing changes to call handling — newest first.',
     body:()=>C.timeline([
+      {t:'Referrals — tag @Managers and @Fronters (10/8/26)', d:'Effective today, do not tag @Refer Out. Instead, tag @Managers and @Fronters for referrals.'},
       {t:'New call on an old closed file — new lead source (10/6/26)', d:'If a new call comes in under an old closed file, create a new lead source and tag @Callbacks and @Managers. If there’s already a live lead source, tag them in the latest lead.'},
       {t:'Qualified leads stay under “New” (9/14/26)', d:'Moving forward, do not place qualified leads under “Follow-Up Needed” or “Potential Opportunity.” Keep them under “New” instead and change the lead owner.<br><strong>Note:</strong> This applies to Missed Call Follow Up and Private Pay.'},
       {t:'We can now take VA insurance to Boston - only to our Boston facility (9/11/26)', d:'Please note that we do not accept ChampVA or VA through Optum.'},
@@ -1214,6 +1283,7 @@ const NAV = [
     {id:'article:chat-reminders', label:'Chat Reminders', icon:'message-square'},
   ]},
   {section:'Insurance', items:[
+    {id:'article:insurance-lookup', label:'Insurance Quick Lookup', icon:'search-check'},
     {id:'article:insurance-qualification', label:'Insurance Qualification', icon:'shield-check'},
     {id:'article:insurance-types', label:'Marketplace vs Private', icon:'git-compare-arrows'},
   ]},
