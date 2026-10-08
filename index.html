@@ -1138,10 +1138,12 @@ const ARTICLES = [
   },
   {
     id:'updates', cat:'Reference', icon:'megaphone', title:'Campaign Updates',
-    author:'Reference', updated:'Aug 4, 2026', read:4,
-    tags:['updates','campaign','kaiser','self-pay','tricare','ambetter'],
+    author:'Reference', updated:'Oct 6, 2026', read:4,
+    tags:['updates','campaign','lead source','lead owner','closed file','callbacks','missed call follow up','private pay','kaiser','self-pay','tricare','ambetter'],
     excerpt:'The latest standing changes to call handling — newest first.',
     body:()=>C.timeline([
+      {t:'New call on an old closed file — new lead source (10/6/26)', d:'If a new call comes in under an old closed file, create a new lead source and tag @Callbacks and @Managers. If there’s already a live lead source, tag them in the latest lead.'},
+      {t:'Qualified leads stay under “New” (9/14/26)', d:'Moving forward, do not place qualified leads under “Follow-Up Needed” or “Potential Opportunity.” Keep them under “New” instead and change the lead owner.<br><strong>Note:</strong> This applies to Missed Call Follow Up and Private Pay.'},
       {t:'We can now take VA insurance to Boston - only to our Boston facility (9/11/26)', d:'Please note that we do not accept ChampVA or VA through Optum.'},
       {t:'Map Boston — answer as Legacy Healing Center (8/4/26)', d:'The whisper is being removed for Map Boston calls, so just answer them as Legacy Healing Center.'},
       {t:'Kaiser — no longer referred out (7/20/26)', d:'We no longer refer out Kaiser insurance, except Kaiser of Washington.'},
@@ -1187,7 +1189,10 @@ const ARTICLES = [
 
 /* ---------- SIDEBAR NAV CONFIG ---------- */
 const NAV = [
-  {section:null, items:[{id:'dashboard', label:'Dashboard', icon:'layout-dashboard'}]},
+  {section:null, items:[
+    {id:'dashboard', label:'Dashboard', icon:'layout-dashboard'},
+    {id:'article:updates', label:'Campaign Updates', icon:'megaphone'},
+  ]},
   {section:'Getting Started', items:[
     {id:'article:cheat-sheet', label:'Quick Call Cheat Sheet', icon:'zap'},
     {id:'article:welcome', label:'Agent Portal', icon:'sunrise'},
@@ -1227,7 +1232,6 @@ const NAV = [
   ]},
   {section:'Reference', items:[
     {id:'article:faq', label:'FAQ', icon:'circle-help'},
-    {id:'article:updates', label:'Campaign Updates', icon:'megaphone'},
     {id:'article:internal-rates', label:'Internal Rates', icon:'lock'},
     {id:'settings', label:'Settings', icon:'settings'},
   ]},
